@@ -1,27 +1,21 @@
-﻿//по папках розділено!
-//проблемит з індексом.
-
-
+﻿
 namespace labka
 {
-    //тип гри 
-
-
     class Program
     {
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            BonusAccount user1 = new BonusAccount("nub", 1, 2);
-            StandartAccount user2 = new StandartAccount("Pro", 5, 26);
+            GameAccount user1 = new BonusAccount("nub", 1, 2);
+            GameAccount user2 = new StandartAccount("Pro", 5, 26);
 
-            HalfPointsForLossAccount user4 = new HalfPointsForLossAccount("bybka", 1, 2);
+            GameAccount user4 = new HalfPointsForLossAccount("bybka", 1, 2);
 
 
-            user1.WinGame("StandartGame", user2,10);
             user1.WinGame("StandartGame", user2, 10);
-            user1.WinGame("StandartGame", user2,10);
+            user1.WinGame("StandartGame", user2, 10);
+            user1.WinGame("StandartGame", user2, 10);
 
             user4.WinGame("StandartGame", user2, new Random().Next(1, 15));
 
