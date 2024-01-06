@@ -1,6 +1,5 @@
 ﻿
 using System.Security.AccessControl;
-//гра де на рейтинг грає лише один гравець. !!!!
 namespace labka
 {
 

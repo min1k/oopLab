@@ -1,12 +1,7 @@
-﻿//по папках розділено!
-//проблемит з індексом.
-
+﻿
 
 namespace labka
 {
-    //тип гри 
-
-
     class Program
     {
         static void Main(string[] args)
