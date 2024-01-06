@@ -58,5 +58,4 @@ namespace labka
             return Rating;
         }
     }
-    //гра де на рейтинг грає лише один гравець.
 }

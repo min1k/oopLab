@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace labka
 {
-    public class GameDbContext
+    public class DbContext
     {
         public List<GameAccount> GameAccounts { get; set; } = new List<GameAccount>();
         public List<Game> Games { get; set; } = new List<Game>();
@@ -69,6 +69,9 @@ namespace labka
             _accountRepository.DeleteAccount(accountId);
         }
     }
+
+
+
     public class GameService : IGameService
     {
         private readonly IGameAccountRepository _accountRepository;
@@ -79,9 +82,6 @@ namespace labka
             _accountRepository = accountRepository;
             _gameRepository = gameRepository;
         }
-
-        // Реалізуйте всі методи інтерфейсу IGameService
-        // ...
 
         public List<GameAccount> GetAllAccounts()
         {
@@ -133,7 +133,4 @@ namespace labka
             _gameRepository.DeleteGame(gameId);
         }
     }
-
-
-
 }

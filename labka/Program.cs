@@ -5,18 +5,17 @@ namespace labka
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             // Імітація роботи з базою даних
-            GameDbContext dbContext = new GameDbContext();
+            DbContext dbContext = new DbContext();
 
-            // Створення репозиторій гравців, який використовує контекст бази даних.
+            // Створення репозиторій гравців і ігор
             IGameAccountRepository accountRepository = new GameAccountRepository(dbContext);
-            // Створення репозиторій ігор, який також використовує контекст бази даних.
             IGameRepository gameRepository = new GameRepository(dbContext);
 
-            // Створюємо сервіс гри, який використовує створені репозиторії для доступу до даних.
+            // Створення сервіс гри, який використовує створені репозиторії для доступу до даних.
             IGameService gameService = new GameService(accountRepository, gameRepository);
 
-            // Додайте інші необхідні частини коду згідно з вашим проектом
             GameAccount player1 = new StandartAccount("Player1", 1000, 0);
             GameAccount player2 = new BonusAccount("Player2", 1200, 0);
             gameService.CreateAccount(player1);
@@ -26,10 +25,6 @@ namespace labka
             Game game2 = new WithoutRatingGame("Player2", 0, "Win", "WithoutRatingGame");
             gameService.CreateGame(game1);
             gameService.CreateGame(game2);
-
-
-
-
 
 
             //Вивід результату всіх ігор 

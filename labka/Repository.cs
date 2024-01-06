@@ -25,9 +25,9 @@ namespace labka
 
     public class GameAccountRepository : IGameAccountRepository
     {
-        private readonly GameDbContext _dbContext;
+        private readonly DbContext _dbContext;
 
-        public GameAccountRepository(GameDbContext dbContext)
+        public GameAccountRepository(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -49,7 +49,7 @@ namespace labka
 
         public void UpdateAccount(GameAccount account)
         {
-            // Implement update logic if needed
+            
         }
 
         public void DeleteAccount(int accountId)
@@ -65,9 +65,9 @@ namespace labka
 
     public class GameRepository : IGameRepository
     {
-        private readonly GameDbContext _dbContext;
+        private readonly DbContext _dbContext;
 
-        public GameRepository(GameDbContext dbContext)
+        public GameRepository(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -89,7 +89,7 @@ namespace labka
 
         public void UpdateGame(Game game)
         {
-            // Implement update logic if needed
+            
         }
 
         public void DeleteGame(int gameId)
