@@ -5,48 +5,26 @@ namespace labka
     {
         static void Main(string[] args)
         {
-            // Імітація роботи з базою даних
-            GameDbContext dbContext = new GameDbContext();
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            // Створення репозиторій гравців, який використовує контекст бази даних.
-            IGameAccountRepository accountRepository = new GameAccountRepository(dbContext);
-            // Створення репозиторій ігор, який також використовує контекст бази даних.
-            IGameRepository gameRepository = new GameRepository(dbContext);
+            GameAccount user1 = new BonusAccount("nub", 1, 2);
+            GameAccount user2 = new StandartAccount("Pro", 5, 26);
 
-            // Створюємо сервіс гри, який використовує створені репозиторії для доступу до даних.
-            IGameService gameService = new GameService(accountRepository, gameRepository);
-
-            // Додайте інші необхідні частини коду згідно з вашим проектом
-            GameAccount player1 = new StandartAccount("Player1", 1000, 0);
-            GameAccount player2 = new BonusAccount("Player2", 1200, 0);
-            gameService.CreateAccount(player1);
-            gameService.CreateAccount(player2);
-
-            Game game1 = new StandartGame("Player1", 10, "Win", "StandartGame");
-            Game game2 = new WithoutRatingGame("Player2", 0, "Win", "WithoutRatingGame");
-            gameService.CreateGame(game1);
-            gameService.CreateGame(game2);
+            GameAccount user4 = new HalfPointsForLossAccount("bybka", 1, 2);
 
 
+            user1.WinGame("StandartGame", user2, 10);
+            user1.WinGame("StandartGame", user2, 10);
+            user1.WinGame("StandartGame", user2, 10);
 
+            user4.WinGame("StandartGame", user2, new Random().Next(1, 15));
 
-
-
-            //Вивід результату всіх ігор 
-            Console.WriteLine("\nРезультати ігор:");
-            var games = gameService.GetAllGames();
-            foreach (var game in games)
-            {
-                Console.WriteLine($"Game ID: {game.Id}, Opponent: {game.OpponentName}, Result: {game.Result}, Rating: {game.Rating}, GameType: {game.GameType}");
-            }
-
-            // Виведення списку гравців
-            Console.WriteLine("Список гравців:");
-            var players = gameService.GetAllAccounts();
-            foreach (var player in players)
-            {
-                Console.WriteLine($"ID: {player.Id}, Username: {player.UserName}, Rating: {player.CurentRating}");
-            }
+            user1.LoseGame("SinglPlayerGame", user2, new Random().Next(1, 15));
+            // user2.LoseGame(user1, new Random().Next(1, 6));
+            //user2.WinGame("StandartGame", user4, new Random().Next(1, 15));
+            //user2.WinGame("StandartGame", user1, new Random().Next(1, 15));
+            user1.GetStatus();
+            user2.GetStatus();
         }
     }
 
