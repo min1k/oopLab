@@ -35,27 +35,4 @@ namespace labka
 
         public abstract int CalculateRating();
     }
-
-
-    public class StandartGame : Game
-    {
-        public StandartGame(string opponentName, int raiting, string result, string gameType) : base(opponentName, 10, result, gameType) // Рейтинг для стандартної гри
-        {
-        }
-        public override int CalculateRating()
-        {
-            return Rating;
-        }
-    }
-
-
-    public class WithoutRatingGame : Game
-    {
-        public WithoutRatingGame(string opponentName, int raiting, string result, string gameType) : base(opponentName, 0, result, gameType) { }
-
-        public override int CalculateRating()
-        {
-            return Rating;
-        }
-    }
 }
