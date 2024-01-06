@@ -20,6 +20,7 @@ namespace labka
         }
 
         public string GameType { get; set;}
+        public int Id { get; internal set; }
 
         public abstract void WinGame(string gameType, GameAccount opponent, int rating);
 

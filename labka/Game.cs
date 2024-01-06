@@ -11,6 +11,7 @@ namespace labka
         public int Index { get; private set; }
         public string Result { get; private set; }
         public string GameType { get; private set; }
+        public int Id { get; internal set; }
 
         //private static int currentIndex = new Random().Next(1, 30000);
         private static int currentIndex = 100;
