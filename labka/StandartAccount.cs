@@ -30,10 +30,7 @@ namespace labka
                 gameWin = new WithoutRatingGame(opponent.UserName, rating, "Гра без рейтингу. Перемога!", gameType);
                 gameLose = new WithoutRatingGame(UserName, rating, "Гра без рейтингу. Поразка!", gameType);
             }
-            GameHistory.Add(gameWin);
-            opponent.GameHistory.Add(gameLose);
-            // Тут потрібно вирішити, чи додавати gameLoss до історії для opponent
-            // Можливо, це потрібно робити в методі LoseGame опонента
+
         }
         public override void LoseGame(string gameType, GameAccount opponent, int rating)
         {
@@ -67,8 +64,7 @@ namespace labka
                 gameWin = new WithoutRatingGame(opponent.UserName, rating, "Стандартна гра. Поразка:(!", gameType);
                 gameLose = new WithoutRatingGame(UserName, rating, "Стандартна гра. Перемога!", gameType);
             }
-            GameHistory.Add(gameWin);
-            opponent.GameHistory.Add(gameLose);
+
         }
     }
 }

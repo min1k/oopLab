@@ -6,33 +6,31 @@ using System.Threading.Tasks;
 
 namespace labka
 {
-    public interface Service
+    public interface IGameService
     {
-        List<GameAccount> GetAllAccounts();
-        GameAccount GetAccountById(int accountId);
-        void CreateAccount(GameAccount account);
-        void UpdateAccount(GameAccount account);
-        void DeleteAccount(int accountId);
-
         List<Game> GetAllGames();
         Game GetGameById(int gameId);
         void CreateGame(Game game);
         void UpdateGame(Game game);
         void DeleteGame(int gameId);
     }
+    public interface IGameAccountService
+    {
+        List<GameAccount> GetAllAccounts();
+        GameAccount GetAccountById(int accountId);
+        void CreateAccount(GameAccount account);
+        void UpdateAccount(GameAccount account);
+        void DeleteAccount(int accountId);
+    }
 
 
-    public class GameService : Service
+    public class GameService : IGameAccountService
     {
         private readonly IGameAccountRepository _accountRepository;
-        private readonly IGameRepository _gameRepository;
-
-        public GameService(IGameAccountRepository accountRepository, IGameRepository gameRepository)
+        public GameService(IGameAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
-            _gameRepository = gameRepository;
         }
-
         public List<GameAccount> GetAllAccounts()
         {
             return _accountRepository.GetAllAccounts();
@@ -57,6 +55,20 @@ namespace labka
         {
             _accountRepository.DeleteAccount(accountId);
         }
+    }
+
+
+
+    public class GameAccountService : IGameService
+    {
+        
+        private readonly IGameRepository _gameRepository;
+
+        public GameAccountService(IGameRepository gameRepository)
+        {
+            _gameRepository = gameRepository;
+        }
+
 
         public List<Game> GetAllGames()
         {
