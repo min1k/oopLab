@@ -12,6 +12,7 @@ namespace labka
         GameAccount GetAccountById(int accountId);
         void CreateAccount(GameAccount account);
         void UpdateAccount(GameAccount account);
+        void ReadAccount(GameAccount account);
         void DeleteAccount(int accountId);
     }
 
@@ -43,6 +44,10 @@ namespace labka
         public void UpdateAccount(GameAccount account)
         {
             
+        }
+        public void ReadAccount(GameAccount account)
+        {
+
         }
 
         public void DeleteAccount(int accountId)

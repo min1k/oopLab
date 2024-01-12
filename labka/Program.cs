@@ -14,7 +14,7 @@ namespace labka
             IGameRepository gameRepository = new GameRepository(dbContext);
 
             // Створення сервіс гри, який використовує створені репозиторії для доступу до даних.
-            IGameService gameService = new GameService(accountRepository, gameRepository);
+            Service gameService = new GameService(accountRepository, gameRepository);
 
             GameAccount player1 = new StandartAccount("Player1", 1000, 0);
             GameAccount player2 = new BonusAccount("Player2", 1200, 0);
@@ -44,8 +44,6 @@ namespace labka
             }
         }
     }
-
-
 }
 
 

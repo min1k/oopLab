@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace labka
 {
-    public interface IGameService
+    public interface Service
     {
         List<GameAccount> GetAllAccounts();
         GameAccount GetAccountById(int accountId);
@@ -22,7 +22,7 @@ namespace labka
     }
 
 
-    public class GameService : IGameService
+    public class GameService : Service
     {
         private readonly IGameAccountRepository _accountRepository;
         private readonly IGameRepository _gameRepository;
