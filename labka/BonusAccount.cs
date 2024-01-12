@@ -32,6 +32,9 @@ namespace labka
                 gameWin = new WithoutRatingGame(opponent.UserName, rating, "Гра без рейтингу. Перемога!", gameType);
                 gameLose = new WithoutRatingGame(UserName, rating, "Гра без рейтингу. Поразка!", gameType);
             }
+            GameHistory.Add(gameWin);
+            opponent.GameHistory.Add(gameLose);
+
 
             // Перевірка на наявність двох перемог у історії гри
             if (CheckForTwoConsecutiveWins())
@@ -73,7 +76,8 @@ namespace labka
                 gameWin = new WithoutRatingGame(opponent.UserName, rating, "Стандартна гра. Поразка:(!", gameType);
                 gameLose = new WithoutRatingGame(UserName, rating, "Стандартна гра. Перемога!", gameType);
             }
-
+            GameHistory.Add(gameWin);
+            opponent.GameHistory.Add(gameLose);
         }
 
         private bool CheckForTwoConsecutiveWins()

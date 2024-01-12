@@ -24,10 +24,10 @@ namespace labka
     }
 
 
-    public class GameService : IGameAccountService
+    public class GameAccountService : IGameAccountService
     {
         private readonly IGameAccountRepository _accountRepository;
-        public GameService(IGameAccountRepository accountRepository)
+        public GameAccountService(IGameAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
         }
@@ -59,12 +59,12 @@ namespace labka
 
 
 
-    public class GameAccountService : IGameService
+    public class GameService : IGameService
     {
         
         private readonly IGameRepository _gameRepository;
 
-        public GameAccountService(IGameRepository gameRepository)
+        public GameService(IGameRepository gameRepository)
         {
             _gameRepository = gameRepository;
         }

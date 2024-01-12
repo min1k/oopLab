@@ -9,11 +9,13 @@ namespace labka
             // Імітація роботи з базою даних
             DbContext dbContext = new DbContext();
 
-            IGameAccountRepository accountRepository = new GameAccountRepository(dbContext);
+            IGameAccountRepository gameAccountRepository = new GameAccountRepository(dbContext);
+            IGameAccountService gameService = new GameAccountService(gameAccountRepository);
+
+
             //IGameRepository gameRepository = new GameRepository(dbContext);
 
 
-            Service gameService = new GameService(accountRepository, gameRepository);
 
 
 
