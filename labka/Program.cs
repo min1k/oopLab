@@ -49,10 +49,10 @@ namespace labka
             }
 
             //проводжу гру 
-            Game game1 = new StandartGame( "Player2",   "Win", "StandartGame");
-            Game game2 = new WithoutRatingGame("Player2", "Win", "WithoutRatingGame");
-            Game game3 = new StandartGame( "Player1",  "Win", "StandartGame");
-            Game game4 = new WithoutRatingGame("Player2","Win", "WithoutRatingGame");
+            Game game1 = new StandartGame("Player1", "Player2","Win", "StandartGame");
+            Game game2 = new WithoutRatingGame("Player2", "Player1","Win", "WithoutRatingGame");
+            Game game3 = new StandartGame("Player2", "Player1","Win", "StandartGame");
+            Game game4 = new WithoutRatingGame("Player1", "Player2","Win", "WithoutRatingGame");
 
             //записую гру в DbContext 
             game.CreateGame(game1);
@@ -65,12 +65,11 @@ namespace labka
             var allGames = game.GetAllGames();
             foreach (var currentGame in allGames)
             {
-                Console.WriteLine($"Game ID: {currentGame.Id},User:------,  Opponent: {currentGame.OpponentName}, Result: {currentGame.Result}, Rating: {currentGame.Rating}, GameType: {currentGame.GameType}");
+                Console.WriteLine($"Game ID: {currentGame.Id}, User:{currentGame.PlayerName}, Opponent: {currentGame.OpponentName}, Result: {currentGame.Result}, Rating: {currentGame.Rating}, GameType: {currentGame.GameType}");
             }
 
             Console.WriteLine("\n  Читання гри з ID 1001:");
             game.ReadGame(1001);
-
         }
     }
 }

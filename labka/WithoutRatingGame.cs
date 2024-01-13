@@ -10,7 +10,7 @@ namespace labka
 {
     public class WithoutRatingGame : Game
     {
-        public WithoutRatingGame(string opponentName, string result, string gameType) : base(opponentName, 0, result, gameType) { }
+        public WithoutRatingGame(string playerName, string opponentName, string result, string gameType) : base(playerName, opponentName, 0, result, gameType) { }
 
         public override int CalculateRating()
         {
