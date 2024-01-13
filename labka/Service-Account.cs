@@ -10,7 +10,6 @@ namespace labka
     {
         List<GameAccount> GetAllAccounts();
         void CreateAccount(GameAccount account);
-        void UpdateAccount(GameAccount account);
         void DeleteAccount(int accountId);
         void ReadAccount(int accountId);
 
@@ -29,7 +28,6 @@ namespace labka
         }
 
 
-
         public void CreateAccount(GameAccount account)
         {
             _accountRepository.RCreateAccount(account);
@@ -43,13 +41,6 @@ namespace labka
         public void DeleteAccount(int accountId)
         {
             _accountRepository.RDeleteAccount(accountId);
-        }
-
-
-
-        public void UpdateAccount(GameAccount account)
-        {
-            _accountRepository.RUpdateAccount(account);
         }
     }
 

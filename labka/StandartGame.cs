@@ -16,5 +16,4 @@ namespace labka
             return Rating;
         }
     }
-
 }

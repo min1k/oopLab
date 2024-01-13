@@ -12,8 +12,8 @@ namespace labka
         List<Game> GetAllGames();
         Game GetGameById(int gameId);
         void CreateGame(Game game);
-        void UpdateGame(Game game);
         void DeleteGame(int gameId);
+        void ReadGame(int accountId);
     }
 
     public class GameService : IGameService
@@ -37,16 +37,15 @@ namespace labka
             return _gameRepository.RReadGameById(gameId);
         }
 
+        public void ReadGame(int accountId)
+        {
+            _gameRepository.RReadGame(accountId);
+        }
+
         public void CreateGame(Game game)
         {
             _gameRepository.RCreateGame(game);
         }
-
-        public void UpdateGame(Game game)
-        {
-            _gameRepository.RUpdateGame(game);
-        }
-
 
         public void DeleteGame(int gameId)
         {
