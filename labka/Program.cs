@@ -1,20 +1,26 @@
 ﻿
 namespace labka
 {
-    class Program
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    public class Program
     {
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
+
             // Імітація роботи з базою даних
             DbContext dbContext = new DbContext();
 
             // Створюю репозиторій для акаунтів
             IGameAccountRepository gameAccountRepository = new GameAccountRepository(dbContext);
             IGameAccountService gameAccountService = new GameAccountService(gameAccountRepository);
+
             // Створюю репозиторій для ігор
             IGameRepository gameRepository = new GameRepository(dbContext);
-            IGameService game = new GameService(gameRepository);
+            IGameService gameService = new GameService(gameRepository);
 
             //створюю гравців 
             GameAccount player1 = new StandartAccount("Player1", 1000, 6);
@@ -29,51 +35,103 @@ namespace labka
             gameAccountService.CreateAccount(player4);
 
 
-            //Виведення списку гравців
+            // Ініціалізація всіх необхідних сервісів та завдань
+            var commandProcessor = new CommandProcessor(
+                new DisplayPlayersTask(gameAccountService),
+                new AddPlayerTask(gameAccountService),
+                new PlayerStatisticsTask(gameAccountService),
+                new PlayGameTask(gameService)
+            );
+
+            while (true)
+            {
+                Console.Write("\nВведіть команду(1-4): ");
+                Console.Write("\n 1 - переглянути гравців \n 2 - додати гравця\n 3 - переглянути статистику \n 4 - зіграти гру\n 5 - вийти \n");
+                string command = Console.ReadLine();
+
+                if (command.ToLower() == "5")
+                {
+                    break;
+                }
+
+                commandProcessor.ProcessCommand(command);
+            }
+        }
+    }
+
+
+    public class DisplayPlayersTask
+    {
+        private readonly IGameAccountService _gameAccountService;
+
+        public DisplayPlayersTask(IGameAccountService gameAccountService)
+        {
+            _gameAccountService = gameAccountService;
+        }
+
+        public void Execute()
+        {
+            var players = _gameAccountService.GetAllAccounts();
             Console.WriteLine("  Список гравців:");
-            var players = gameAccountService.GetAllAccounts();
             foreach (var player in players)
             {
                 Console.WriteLine($"ID: {player.Id}, Username: {player.UserName}, Rating: {player.CurentRating}");
             }
-            //читання окремого аккаунту
-            Console.WriteLine("\n  Акаунт з ID = 1");
-            gameAccountService.ReadAccount(1);
+        }
+    }
 
-            // видалення акаунту
-            gameAccountService.DeleteAccount(3);
-            Console.WriteLine("\n  Список гравців після видалення гравця з ID3:");
-            foreach (var player in players)
-            {
-                Console.WriteLine($"ID: {player.Id}, Username: {player.UserName}, Rating: {player.CurentRating}");
-            }
+    public class AddPlayerTask
+    {
+        private readonly IGameAccountService _gameAccountService;
 
-            //проводжу гру 
-            Game game1 = new StandartGame("Player1", "Player2","Win", "StandartGame");
-            Game game2 = new WithoutRatingGame("Player2", "Player1","Win", "WithoutRatingGame");
-            Game game3 = new StandartGame("Player2", "Player1","Win", "StandartGame");
-            Game game4 = new WithoutRatingGame("Player1", "Player2","Win", "WithoutRatingGame");
+        public AddPlayerTask(IGameAccountService gameAccountService)
+        {
+            _gameAccountService = gameAccountService;
+        }
 
-            //записую гру в DbContext 
-            game.CreateGame(game1);
-            game.CreateGame(game2);
-            game.CreateGame(game3);
-            game.CreateGame(game4);
+        public void Execute(string userName, int currentRating, int gamesCount, string accountType)
+        {
+            // Логіка додавання нового гравця з вказаними параметрами
+            // Використовуйте _gameAccountService для створення гравця
+            // та додавання його в базу даних
+        }
+    }
 
-            // Вивід результату всіх ігор 
-            //Console.WriteLine("\n  Результати ігор:");
-            //var allGames = game.GetAllGames();
-            //foreach (var currentGame in allGames)
-            //{
-            //    Console.WriteLine($"Game ID: {currentGame.Id}, User:{currentGame.PlayerName}, Opponent: {currentGame.OpponentName}, Result: {currentGame.Result}, Rating: {currentGame.Rating}, GameType: {currentGame.GameType}");
-            //}
-            Console.WriteLine("\n  Читання гри з ID 1001:");
-            game.ReadGame(1001);
-            Console.WriteLine("\n Всі ігри гравця Player2:");
-            game.GetAllGames("Player2");
+    public class PlayerStatisticsTask
+    {
+        private readonly IGameAccountService _gameAccountService;
+
+        public PlayerStatisticsTask(IGameAccountService gameAccountService)
+        {
+            _gameAccountService = gameAccountService;
+        }
+
+        public void Execute(int playerId)
+        {
+            // Логіка виведення статистики конкретного гравця за допомогою playerId
+            // Використовуйте _gameAccountService та _gameService за потреби
+        }
+    }
+
+    public class PlayGameTask
+    {
+        private readonly IGameService _gameService;
+
+        public PlayGameTask(IGameService gameService)
+        {
+            _gameService = gameService;
+        }
+
+        public void Execute(string playerName, string opponentName, string result, string gameType)
+        {
+            // Логіка гри між гравцями з вказаними параметрами
+            // Використовуйте _gameService для створення гри
+            // та зберігання результатів гри в базі даних
         }
     }
 }
+
+
 
 
 
