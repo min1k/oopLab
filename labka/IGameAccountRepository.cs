@@ -8,49 +8,52 @@ namespace labka
 {
     public interface IGameAccountRepository
     {
-        List<GameAccount> GetAllAccounts();
-        GameAccount GetAccountById(int accountId);
-        void CreateAccount(GameAccount account);
-        void UpdateAccount(GameAccount account);
-        void ReadAccount(GameAccount account);
-        void DeleteAccount(int accountId);
+        List<GameAccount> RGetAllAccounts();
+        void RCreateAccount(GameAccount account);
+        void RUpdateAccount(GameAccount account);
+        void RReadAccount(int accountId);
+        void RDeleteAccount(int accountId);
     }
 
 
     public class GameAccountRepository : IGameAccountRepository
     {
         private readonly DbContext _dbContext;
+        private static int AccountId = 0;
 
         public GameAccountRepository(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public List<GameAccount> GetAllAccounts()
+        public List<GameAccount> RGetAllAccounts()
         {
             return _dbContext.GameAccounts;
         }
 
-        public GameAccount GetAccountById(int accountId)
-        {
-            return _dbContext.GameAccounts.FirstOrDefault(a => a.Id == accountId);
-        }
 
-        public void CreateAccount(GameAccount account)
+        public void RCreateAccount(GameAccount account)
         {
+            account.Id = ++AccountId;
             _dbContext.GameAccounts.Add(account);
         }
 
-        public void UpdateAccount(GameAccount account)
+        public void RReadAccount(int accountId)
         {
-            
+            //для знаходження 
+            var account = _dbContext.GameAccounts.FirstOrDefault(a => a.Id == accountId);
+            if (account != null)
+            {
+                Console.WriteLine($"Account Id: {account.Id}, Username: {account.UserName}, Rating:{account.CurentRating}");
+            }
+            else
+            {
+                // Обліковий запис не знайдено, виконайте відповідні дії
+                Console.WriteLine($"Акаунт з Id {account.Id} не знайдено .");
+            }
         }
-        public void ReadAccount(GameAccount account)
-        {
 
-        }
-
-        public void DeleteAccount(int accountId)
+        public void RDeleteAccount(int accountId)
         {
             var account = _dbContext.GameAccounts.FirstOrDefault(a => a.Id == accountId);
             if (account != null)
@@ -58,5 +61,20 @@ namespace labka
                 _dbContext.GameAccounts.Remove(account);
             }
         }
+
+
+
+
+
+
+
+
+
+
+        public void RUpdateAccount(GameAccount account)
+        {
+
+        }
+
     }
 }

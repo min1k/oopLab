@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace labka
 {
+
     public interface IGameService
     {
         List<Game> GetAllGames();
@@ -14,50 +15,6 @@ namespace labka
         void UpdateGame(Game game);
         void DeleteGame(int gameId);
     }
-    public interface IGameAccountService
-    {
-        List<GameAccount> GetAllAccounts();
-        GameAccount GetAccountById(int accountId);
-        void CreateAccount(GameAccount account);
-        void UpdateAccount(GameAccount account);
-        void DeleteAccount(int accountId);
-    }
-
-
-    public class GameAccountService : IGameAccountService
-    {
-        private readonly IGameAccountRepository _accountRepository;
-        public GameAccountService(IGameAccountRepository accountRepository)
-        {
-            _accountRepository = accountRepository;
-        }
-        public List<GameAccount> GetAllAccounts()
-        {
-            return _accountRepository.GetAllAccounts();
-        }
-
-        public GameAccount GetAccountById(int accountId)
-        {
-            return _accountRepository.GetAccountById(accountId);
-        }
-
-        public void CreateAccount(GameAccount account)
-        {
-            _accountRepository.CreateAccount(account);
-        }
-
-        public void UpdateAccount(GameAccount account)
-        {
-            _accountRepository.UpdateAccount(account);
-        }
-
-        public void DeleteAccount(int accountId)
-        {
-            _accountRepository.DeleteAccount(accountId);
-        }
-    }
-
-
 
     public class GameService : IGameService
     {
@@ -72,27 +29,28 @@ namespace labka
 
         public List<Game> GetAllGames()
         {
-            return _gameRepository.GetAllGames();
+            return _gameRepository.RGetAllGames();
         }
 
         public Game GetGameById(int gameId)
         {
-            return _gameRepository.GetGameById(gameId);
+            return _gameRepository.RReadGameById(gameId);
         }
 
         public void CreateGame(Game game)
         {
-            _gameRepository.CreateGame(game);
+            _gameRepository.RCreateGame(game);
         }
 
         public void UpdateGame(Game game)
         {
-            _gameRepository.UpdateGame(game);
+            _gameRepository.RUpdateGame(game);
         }
+
 
         public void DeleteGame(int gameId)
         {
-            _gameRepository.DeleteGame(gameId);
+            _gameRepository.RDeleteGame(gameId);
         }
     }
 }
