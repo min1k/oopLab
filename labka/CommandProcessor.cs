@@ -39,59 +39,16 @@ namespace labka
 
                 //addplayer
                 case "2":
-                    if (args.Length == 2)
-                    {
-                        string userName = args[1];
-                        int currentRating = 0; // Вам можливо, потрібно обробити помилки при парсингу.
-                        int gamesCount = 0; // Тут також може бути необхідна обробка помилок.
-                        string accountType = "SomeDefaultAccountType"; // Вставте свій тип акаунту за замовчуванням.
-
-                        _addPlayerTask.Execute(userName, currentRating, gamesCount, accountType);
-                    }
-                    else if (args.Length == 5)
-                    {
-                        string userName = args[1];
-                        int currentRating = int.Parse(args[2]);
-                        int gamesCount = int.Parse(args[3]);
-                        string accountType = args[4];
-
-                        _addPlayerTask.Execute(userName, currentRating, gamesCount, accountType);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid number of arguments for addplayer command.");
-                    }
+                    _addPlayerTask.Execute();
                     break;
-
-                //playerstatistics
                 case "3":
-                    if (args.Length == 2)
-                    {
-                        int playerId = int.Parse(args[1]);
-                        _playerStatisticsTask.Execute(playerId);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid number of arguments for playerstatistics command.");
-                    }
+                    _playerStatisticsTask.DisplayPlayerInfo();
                     break;
 
-                //playgame
                 case "4":
-                    if (args.Length == 5)
-                    {
-                        string playerName = args[1];
-                        string opponentName = args[2];
-                        string result = args[3];
-                        string gameType = args[4];
-
-                        _playGameTask.Execute(playerName, opponentName, result, gameType);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid number of arguments for playgame command.");
-                    }
+                    _playGameTask.Execute();
                     break;
+
 
                 default:
                     Console.WriteLine("Невідома команда. Доступні команди: 1, 2, 3, 4, 5");
@@ -100,4 +57,4 @@ namespace labka
         }
 
     }
-    }
+}
