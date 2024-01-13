@@ -84,12 +84,10 @@ namespace labka
         {
             if (GameHistory.Count >= 2)
             {
-                // Перевірка на наявність двох перемог підряд
                 return GameHistory[GameHistory.Count - 1] is StandartGame winGame1 &&
                        winGame1.Result == "Стандартна гра. Перемога!" &&
                        GameHistory[GameHistory.Count - 2] is StandartGame winGame2 &&
                        winGame2.Result == "Стандартна гра. Перемога!";
-                // Тут можна розглянути інші варіанти логіки перевірки
             }
             return false;
         }

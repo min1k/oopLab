@@ -32,8 +32,6 @@ namespace labka
             }
             GameHistory.Add(gameWin);
             opponent.GameHistory.Add(gameLose);
-            // Тут потрібно вирішити, чи додавати gameLoss до історії для opponent
-            // Можливо, це потрібно робити в методі LoseGame опонента
         }
         public override void LoseGame(string gameType, GameAccount opponent, int rating)
         {

@@ -35,7 +35,7 @@ namespace labka
             gameAccountService.CreateAccount(player4);
 
 
-            // Ініціалізація всіх необхідних сервісів та завдань
+            // Ініціалізація 
         var commandProcessor = new CommandProcessor(
             new DisplayPlayersTask(gameAccountService),
             new AddPlayerTask(gameAccountService),
@@ -59,135 +59,6 @@ namespace labka
             }
         }
     }
-
-
-    public class DisplayPlayersTask
-    {
-        private readonly IGameAccountService _gameAccountService;
-
-        public DisplayPlayersTask(IGameAccountService gameAccountService)
-        {
-            _gameAccountService = gameAccountService;
-        }
-
-        public void Execute()
-        {
-            var players = _gameAccountService.GetAllAccounts();
-            Console.WriteLine("  Список гравців:");
-            foreach (var player in players)
-            {
-                Console.WriteLine($"ID: {player.Id}, Username: {player.UserName}, Rating: {player.CurentRating}");
-            }
-        }
-    }
-
-    public class AddPlayerTask
-    {
-        private readonly IGameAccountService _gameAccountService;
-
-        public AddPlayerTask(IGameAccountService gameAccountService)
-        {
-            _gameAccountService = gameAccountService;
-        }
-
-        public void Execute()
-        {
-            Console.WriteLine("Додавання нового гравця:");
-
-            Console.Write("Ім'я гравця: ");
-            string userName = Console.ReadLine();
-
-            Console.Write("Рейтинг гравця: ");
-            if (!int.TryParse(Console.ReadLine(), out int currentRating))
-            {
-                Console.WriteLine("Некоректний формат рейтингу. Введіть ціле число.");
-                return;
-            }
-
-            Console.Write("Кількість зіграних партій: ");
-            if (!int.TryParse(Console.ReadLine(), out int gamesCount))
-            {
-                Console.WriteLine("Некоректний формат кількості партій. Введіть ціле число.");
-                return;
-            }
-
-            string accountType;
-            do
-            {
-                Console.Write("Тип акаунту (StandartAccount або BonusAccount): ");
-                accountType = Console.ReadLine();
-            } while (accountType != "StandartAccount" && accountType != "BonusAccount");
-
-            if (accountType == "StandartAccount")
-            {
-                _gameAccountService.CreateAccount(new StandartAccount(userName, currentRating, gamesCount));
-            }
-            else if (accountType == "BonusAccount")
-            {
-                _gameAccountService.CreateAccount(new BonusAccount(userName, currentRating, gamesCount));
-            }
-
-            Console.WriteLine($"Гравець {userName} успішно доданий до бази даних.");
-        }
-    }
-
-
-
-    public class PlayerStatisticsTask
-    {
-        private readonly IGameAccountService _gameAccountService;
-
-        public PlayerStatisticsTask(IGameAccountService gameAccountService)
-        {
-            _gameAccountService = gameAccountService;
-        }
-
-        public void DisplayPlayerInfo()
-        {
-            Console.Write("Введіть ідентифікатор гравця: ");
-            if (!int.TryParse(Console.ReadLine(), out int playerId))
-            {
-                Console.WriteLine("Некоректний формат ідентифікатора гравця. Введіть ціле число.");
-                return;
-            }
-
-            // метод ReadAccount з ідентифікатором гравця
-            _gameAccountService.ReadAccount(playerId);
-        }
-    }
-
-
-
-
-    public class PlayGameTask
-    {
-        private readonly IGameService _gameService;
-
-        public PlayGameTask(IGameService gameService)
-        {
-            _gameService = gameService;
-        }
-
-        public void Execute()
-        {
-            Console.WriteLine("Проведення нової гри:");
-
-            Console.Write("Ім'я першого гравця: ");
-            string player1Name = Console.ReadLine();
-
-            Console.Write("Ім'я другого гравця: ");
-            string player2Name = Console.ReadLine();
-
-            Console.Write("Тип гри: ");
-            string gameType = Console.ReadLine();
-
-            //Game newGame = new Game(player1Name, player2Name, "Win" gameType);
-           // _gameService.CreateGame(newGame);
-            Console.WriteLine("В мене не вийшло доробити;(");
-        }
-    }
-
-
 }
 
 

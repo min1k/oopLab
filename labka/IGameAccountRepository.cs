@@ -47,7 +47,6 @@ namespace labka
             }
             else
             {
-                // Обліковий запис не знайдено, виконайте відповідні дії
                 Console.WriteLine($"Акаунт з Id {account.Id} не знайдено .");
             }
         }

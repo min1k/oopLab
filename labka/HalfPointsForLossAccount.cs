@@ -11,7 +11,6 @@ namespace labka
         public HalfPointsForLossAccount(string userName, int curentRating, int gamesCount)
             : base(userName, curentRating, gamesCount)
         {
-            // Додаткова ініціалізація для PremiumGameAccount
         }
 
         public override void WinGame(string gameType, GameAccount opponent, int rating)
@@ -36,8 +35,6 @@ namespace labka
             }
             GameHistory.Add(gameWin);
             opponent.GameHistory.Add(gameLose);
-            // Тут потрібно вирішити, чи додавати gameLoss до історії для opponent
-            // Можливо, це потрібно робити в методі LoseGame опонента
         }
 
         public override void LoseGame(string gameType, GameAccount opponent, int rating)
