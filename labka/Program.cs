@@ -60,15 +60,11 @@ namespace labka
             game.CreateGame(game3);
             game.CreateGame(game4);
 
-            // Вивід результату всіх ігор 
-            //Console.WriteLine("\n  Результати ігор:");
-            //var allGames = game.GetAllGames();
-            //foreach (var currentGame in allGames)
-            //{
-            //    Console.WriteLine($"Game ID: {currentGame.Id}, User:{currentGame.PlayerName}, Opponent: {currentGame.OpponentName}, Result: {currentGame.Result}, Rating: {currentGame.Rating}, GameType: {currentGame.GameType}");
-            //}
+            //читання окремої гри
             Console.WriteLine("\n  Читання гри з ID 1001:");
             game.ReadGame(1001);
+
+            //Всі ігри деякого гравця
             Console.WriteLine("\n Всі ігри гравця Player2:");
             game.GetAllGames("Player2");
         }
