@@ -24,13 +24,13 @@ namespace labka
 
             if (gameType == "StandartGame")
             {
-                gameWin = new StandartGame(opponent.UserName, rating, "Стандартна гра. Перемога!", gameType);
-                gameLose = new StandartGame(UserName, rating, "Стандартна гра. Поразка!", gameType);
+                gameWin = new StandartGame(opponent.UserName, "Стандартна гра. Перемога!", gameType);
+                gameLose = new StandartGame(UserName,  "Стандартна гра. Поразка!", gameType);
             }
             else
             {
-                gameWin = new WithoutRatingGame(opponent.UserName, rating, "Гра без рейтингу. Перемога!", gameType);
-                gameLose = new WithoutRatingGame(UserName, rating, "Гра без рейтингу. Поразка!", gameType);
+                gameWin = new WithoutRatingGame(opponent.UserName, "Гра без рейтингу. Перемога!", gameType);
+                gameLose = new WithoutRatingGame(UserName, "Гра без рейтингу. Поразка!", gameType);
             }
             GameHistory.Add(gameWin);
             opponent.GameHistory.Add(gameLose);
@@ -67,14 +67,14 @@ namespace labka
 
             if (gameType == "StandartGame")
             {
-                gameWin = new StandartGame(opponent.UserName, rating, "Стандартна гра. Поразка:(!", gameType);
-                gameLose = new StandartGame(UserName, rating, "Стандартна гра. Перемога!", gameType);
+                gameWin = new StandartGame(opponent.UserName,  "Стандартна гра. Поразка:(!", gameType);
+                gameLose = new StandartGame(UserName,  "Стандартна гра. Перемога!", gameType);
 
             }
             else
             {
-                gameWin = new WithoutRatingGame(opponent.UserName, rating, "Стандартна гра. Поразка:(!", gameType);
-                gameLose = new WithoutRatingGame(UserName, rating, "Стандартна гра. Перемога!", gameType);
+                gameWin = new WithoutRatingGame(opponent.UserName, "Стандартна гра. Поразка:(!", gameType);
+                gameLose = new WithoutRatingGame(UserName, "Стандартна гра. Перемога!", gameType);
             }
             GameHistory.Add(gameWin);
             opponent.GameHistory.Add(gameLose);
