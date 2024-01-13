@@ -9,7 +9,7 @@ namespace labka
 {
     public interface IGameRepository
     {
-        List<Game> RGetAllGames();
+        List<Game> RGetAllGames(string playerName);
         Game RReadGameById(int gameId);
         void RCreateGame(Game game);
         void RDeleteGame(int gameId);
@@ -27,9 +27,17 @@ namespace labka
             _dbContext = dbContext;
         }
 
-        public List<Game> RGetAllGames()
+        public List<Game> RGetAllGames(string playerName)
         {
-            return _dbContext.Games;
+
+            var playerGames = _dbContext.Games.Where(g => g.PlayerName == playerName).ToList();
+
+            foreach (var currentGame in playerGames)
+            {
+                Console.WriteLine($"Game ID: {currentGame.Id}, User:{currentGame.PlayerName}, Opponent: {currentGame.OpponentName}, Result: {currentGame.Result}, Rating: {currentGame.Rating}, GameType: {currentGame.GameType}");
+            }
+
+            return playerGames;
         }
 
         public Game RReadGameById(int gameId)

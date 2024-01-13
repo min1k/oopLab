@@ -9,7 +9,7 @@ namespace labka
 
     public interface IGameService
     {
-        List<Game> GetAllGames();
+        List<Game> GetAllGames(string playerName);
         Game GetGameById(int gameId);
         void CreateGame(Game game);
         void DeleteGame(int gameId);
@@ -27,9 +27,9 @@ namespace labka
         }
 
 
-        public List<Game> GetAllGames()
+        public List<Game> GetAllGames(string playerName)
         {
-            return _gameRepository.RGetAllGames();
+            return _gameRepository.RGetAllGames(playerName);
         }
 
         public Game GetGameById(int gameId)
